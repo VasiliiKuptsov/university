@@ -1,6 +1,7 @@
 from django.db import models
+from config.settings import AUTH_USER_MODEL
+NULLABLE = {'blank': True, 'null': True}
 
-from users.models import User
 
 
 class Course(models.Model):
@@ -48,7 +49,7 @@ class Lesson(models.Model):
         verbose_name="изображение",
         help_text="введите плакат урока",
     )
-    video = models.ImageField(
+    video = models.URLField(
         # upload_to="products/photo",
         blank=True,
         null=True,
@@ -71,45 +72,20 @@ class Lesson(models.Model):
         verbose_name_plural = "Уроки"
         
 
+class Subscription(models.Model):
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='пользователь')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='курс')
+    is_subscribe = models.BooleanField(default=False, verbose_name="подписка")
+
+    def __str__(self):
+        return f'{self.user} - {self.course}'
+
+    class Meta:
+        verbose_name = 'подписка'
+        verbose_name_plural = 'подписки'
 
 
 
 
 
 
-
-'''
-    price = models.IntegerField(
-        blank=True,
-        null=True,
-        verbose_name="цена за покупку",
-        help_text="укахите цену продукта",
-    )
-
-    updated_at = models.DateField(
-        blank=True,
-        null=True,
-        verbose_name="дата последнего изменения",
-        help_text="введите последнего изменения продукта",
-    )
-
-    views_counter = models.PositiveIntegerField(
-        verbose_name='Счетчик просмотров',
-        help_text='Укахите количество просмотров',
-        default=0,
-    )
-
-    owner = models.ForeignKey(
-        User,
-        verbose_name='Купец',
-        help_text='Укажите продавца товараэ',
-        blank=True, null=True,
-        on_delete=models.SET_NULL,
-    )
-
-    publication = models.BooleanField(
-        default=False,
-        verbose_name='Опубликовано',
-    )
-
-'''

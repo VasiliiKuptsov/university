@@ -3,15 +3,19 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from materials.models import Course, Lesson, Subscription
-from materials.serializers import CourseSerializer, LessonSerializer, SubscriptionSerializer
+from materials.serializers import CourseSerializer, LessonSerializer, SubscriptionSerializer, CourseDitailSerializer
 from rest_framework import viewsets, generics
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 
 class CourseViewSet(ModelViewSet):
     queryset = Course.objects.all()
-    serializer_class = CourseSerializer
 
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return CourseDitailSerializer
+        return CourseSerializer
 
 
 

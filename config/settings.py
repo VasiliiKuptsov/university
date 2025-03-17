@@ -13,10 +13,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+# See https
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-ubk0&rdsfjjc3mm#13b$__fvvs#+ol7cmn+_gk@(9diovcy#ll"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,11 +80,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "univirsity",  # os.getenv("NAME"),
-        "USER": "postgres",  # os.getenv("USER"),
-        "PASSWORD": "1705",  # os.getenv("PASSWORD"),
-        "HOST": "localhost",  # os.getenv("HOST"),
-        "PORT": "5432",  # os.getenv("PORT"),
+        "NAME": "university",# os.getenv("NAME"),
+        "USER": "postgres",#os.getenv("USER"),
+        "PASSWORD": "1705",#os.getenv("PASSWORD"),
+        "HOST": "localhost",#os.getenv("HOST"),
+        "PORT": "5432",#os.getenv("PORT"),
     }
 }
 

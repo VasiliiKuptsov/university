@@ -1,7 +1,7 @@
 from django.db import models
 from config.settings import AUTH_USER_MODEL
-NULLABLE = {'blank': True, 'null': True}
 
+NULLABLE = {"blank": True, "null": True}
 
 
 class Course(models.Model):
@@ -11,7 +11,7 @@ class Course(models.Model):
         help_text="введите название курса",
     )
     image = models.ImageField(
-        #upload_to="products/photo",
+        # upload_to="products/photo",
         blank=True,
         null=True,
         verbose_name="изображение",
@@ -22,6 +22,9 @@ class Course(models.Model):
         null=True,
         verbose_name="описание курса",
         help_text="опишите курса",
+    )
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name="владелец"
     )
 
     def __str__(self):
@@ -40,10 +43,13 @@ class Lesson(models.Model):
     )
 
     description = models.TextField(
-        blank=True, null=True, verbose_name="описание", help_text="опищите урок",
+        blank=True,
+        null=True,
+        verbose_name="описание",
+        help_text="опищите урок",
     )
     image = models.ImageField(
-        #upload_to="products/photo",
+        # upload_to="products/photo",
         blank=True,
         null=True,
         verbose_name="изображение",
@@ -63,29 +69,27 @@ class Lesson(models.Model):
         help_text="введите курс",
         blank=True,
         null=True,
-        related_name='materials',
+        related_name="materials",
     )
-
+    owner = models.ForeignKey(
+        AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name="владелец"
+    )
 
     class Meta:
         verbose_name = "Урок"
         verbose_name_plural = "Уроки"
-        
+
 
 class Subscription(models.Model):
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='пользователь')
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='курс')
+    user = models.ForeignKey(
+        AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="пользователь"
+    )
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="курс")
     is_subscribe = models.BooleanField(default=False, verbose_name="подписка")
 
     def __str__(self):
-        return f'{self.user} - {self.course}'
+        return f"{self.user} - {self.course}"
 
     class Meta:
-        verbose_name = 'подписка'
-        verbose_name_plural = 'подписки'
-
-
-
-
-
-
+        verbose_name = "подписка"
+        verbose_name_plural = "подписки"

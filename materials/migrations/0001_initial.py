@@ -8,48 +8,148 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='введите название курса', max_length=200, verbose_name='наименование курса')),
-                ('image', models.ImageField(blank=True, help_text='введите изображение курса', null=True, upload_to='', verbose_name='изображение')),
-                ('description', models.TextField(blank=True, help_text='опишите курса', null=True, verbose_name='описание курса')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="введите название курса",
+                        max_length=200,
+                        verbose_name="наименование курса",
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True,
+                        help_text="введите изображение курса",
+                        null=True,
+                        upload_to="",
+                        verbose_name="изображение",
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True,
+                        help_text="опишите курса",
+                        null=True,
+                        verbose_name="описание курса",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Курс',
-                'verbose_name_plural': 'Курсы',
+                "verbose_name": "Курс",
+                "verbose_name_plural": "Курсы",
             },
         ),
         migrations.CreateModel(
-            name='Lesson',
+            name="Lesson",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(help_text='введите название урока', max_length=200, verbose_name='наименование')),
-                ('description', models.TextField(blank=True, help_text='опищите урок', null=True, verbose_name='описание')),
-                ('image', models.ImageField(blank=True, help_text='введите плакат урока', null=True, upload_to='', verbose_name='изображение')),
-                ('video', models.URLField(blank=True, help_text='введите видео урока', null=True, verbose_name='видео')),
-                ('course', models.ForeignKey(blank=True, help_text='введите курс', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='materials', to='materials.course', verbose_name='курс')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        help_text="введите название урока",
+                        max_length=200,
+                        verbose_name="наименование",
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True,
+                        help_text="опищите урок",
+                        null=True,
+                        verbose_name="описание",
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True,
+                        help_text="введите плакат урока",
+                        null=True,
+                        upload_to="",
+                        verbose_name="изображение",
+                    ),
+                ),
+                (
+                    "video",
+                    models.URLField(
+                        blank=True,
+                        help_text="введите видео урока",
+                        null=True,
+                        verbose_name="видео",
+                    ),
+                ),
+                (
+                    "course",
+                    models.ForeignKey(
+                        blank=True,
+                        help_text="введите курс",
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="materials",
+                        to="materials.course",
+                        verbose_name="курс",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Урок',
-                'verbose_name_plural': 'Уроки',
+                "verbose_name": "Урок",
+                "verbose_name_plural": "Уроки",
             },
         ),
         migrations.CreateModel(
-            name='Subscription',
+            name="Subscription",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('is_subscribe', models.BooleanField(default=False, verbose_name='подписка')),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='курс', to='materials.course')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "is_subscribe",
+                    models.BooleanField(default=False, verbose_name="подписка"),
+                ),
+                (
+                    "course",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="курс",
+                        to="materials.course",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'подписка',
-                'verbose_name_plural': 'подписки',
+                "verbose_name": "подписка",
+                "verbose_name_plural": "подписки",
             },
         ),
     ]

@@ -1,6 +1,5 @@
-
-
 import os
+from datetime import timedelta
 
 from dotenv import load_dotenv
 
@@ -34,7 +33,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    'django_filters',
+    "rest_framework_simplejwt",
+    "django_filters",
     "users",
     "materials",
 ]
@@ -80,11 +80,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "university",# os.getenv("NAME"),
-        "USER": "postgres",#os.getenv("USER"),
-        "PASSWORD": "1705",#os.getenv("PASSWORD"),
-        "HOST": "localhost",#os.getenv("HOST"),
-        "PORT": "5432",#os.getenv("PORT"),
+        "NAME": "university",  # os.getenv("NAME"),
+        "USER": "postgres",  # os.getenv("USER"),
+        "PASSWORD": "1705",  # os.getenv("PASSWORD"),
+        "HOST": "localhost",  # os.getenv("HOST"),
+        "PORT": "5432",  # os.getenv("PORT"),
     }
 }
 
@@ -133,5 +133,16 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=50000),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
 }

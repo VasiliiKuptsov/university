@@ -1,6 +1,5 @@
-
-
 import os
+from datetime import timedelta
 
 from dotenv import load_dotenv
 
@@ -13,10 +12,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+# See https
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-ubk0&rdsfjjc3mm#13b$__fvvs#+ol7cmn+_gk@(9diovcy#ll"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,7 +33,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    'django_filters',
+    "rest_framework_simplejwt",
+    "django_filters",
     "users",
     "materials",
 ]
@@ -80,7 +80,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "univirsity",  # os.getenv("NAME"),
+        "NAME": "university",  # os.getenv("NAME"),
         "USER": "postgres",  # os.getenv("USER"),
         "PASSWORD": "1705",  # os.getenv("PASSWORD"),
         "HOST": "localhost",  # os.getenv("HOST"),
@@ -133,5 +133,16 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=50000),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
 }

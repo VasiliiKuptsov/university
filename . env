@@ -1,0 +1,12 @@
+SECRET_KEY = "django-insecure-ubk0&rdsfjjc3mm#13b$__fvvs#+ol7cmn+_gk@(9diovcy#ll"
+
+DEBUG=
+
+NAME= "university"
+USER= "postgres"
+PASSWORD= "1705"
+HOST= "localhost"
+PORT= "5432"
+
+
+

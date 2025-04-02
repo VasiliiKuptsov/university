@@ -15,8 +15,3 @@ class LessonAdmin(admin.ModelAdmin):
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ["pk", "user", "course", "is_subscribe"]
-
-
-# Register your models here.rom django.contrib import admin
-
-# Register your models here.

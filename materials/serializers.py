@@ -6,7 +6,7 @@ from materials.validators import YouTubeValidator
 
 class LessonSerializer(serializers.ModelSerializer):
 
-    validators = [YouTubeValidator(field="url_video")]
+    validators = [YouTubeValidator(field="video")]
 
     class Meta:
         model = Lesson
@@ -17,6 +17,7 @@ class CourseSerializer(serializers.ModelSerializer):
     lessons = SerializerMethodField()
     lessons_set = LessonSerializer(many=True, read_only=True, source="course")
     lessons_count = serializers.SerializerMethodField(read_only=True)
+    #subscription = SerializerMethodField()
 
     def get_lessons(self, course):
         return [lesson.name for lesson in Lesson.objects.filter(course=course)]
@@ -40,6 +41,7 @@ class CourseSerializer(serializers.ModelSerializer):
             "lessons_count",
             "lessons_set",
             "lessons",
+
         ]
 
 

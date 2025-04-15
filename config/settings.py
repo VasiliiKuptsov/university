@@ -18,9 +18,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = os.getenv("DEBUG", False) == "True"
+
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework_simplejwt",
+    "drf_yasg",
     "django_filters",
     "users",
     "materials",
@@ -132,6 +134,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+
+
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -147,12 +151,20 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
 }
 
+
+STRIPE_API_KEY = "sk_test_51RDMLgQwWs8OKaTJBOgtVQlSbloNLbxKL7JjVxQtgJUBCswcB0jdt6lMllCKUqZsWfwmtD64Mdi4vXNlkLXCUQGc00vYzYTU7o"  #os.getenv('STRIPE_API_KEY')
+
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
 EMAIL_HOST_USER = "proba1.21@mail.ru"
-EMAIL_HOST_PASSWORD = "eJEiFkz1QhXQewgLtheN"
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")  #"eJEiFkz1QhXQewgLtheN"
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
+
+

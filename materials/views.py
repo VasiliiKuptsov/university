@@ -19,9 +19,7 @@ from users.permissions import IsModerator, IsOwner
 from rest_framework.response import Response
 from materials.tasks import course_update
 
-@method_decorator(name='list', decorator=swagger_auto_schema(
-    operation_description="description from swagger_auto_schema via method_decorator"
-))
+
 class CourseViewSet(ModelViewSet):
     queryset = Course.objects.all()
     pagination_class = CustomPagination
@@ -45,14 +43,11 @@ class CourseViewSet(ModelViewSet):
             self.permission_classes = (~IsModerator | IsOwner,)
         return super().get_permissions()
 
+
     def perform_update(self, serializer):
-        #instance = serializer.save()
-        #course_update.delay(instance.pk)
-        #return instance
-        serializer.save()
-        course = serializer.save()
-        course_id = course.id
-        course_update(course_id)
+        instance = serializer.save()
+        course_update.delay(instance.pk)
+        return instance
 
 
 class LessonCreateAPIView(generics.CreateAPIView):

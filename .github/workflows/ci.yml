@@ -48,7 +48,7 @@ jobs:
     - name: Run tests
       env:
         SECRET_KEY: ${{ secrets.SSH_KEY }}
-        DJANGO_SETTINGS_MODULE: "my_app.settings"
+        DJANGO_SETTINGS_MODULE: "elena.settings"
       run: python manage.py test
 
   build:

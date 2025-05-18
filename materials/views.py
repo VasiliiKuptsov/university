@@ -1,7 +1,3 @@
-from django.shortcuts import render
-from django.utils.decorators import method_decorator
-from drf_yasg.utils import swagger_auto_schema
-
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from materials.models import Course, Lesson, Subscription
@@ -11,7 +7,7 @@ from materials.serializers import (
     SubscriptionSerializer,
     CourseDitailSerializer,
 )
-from rest_framework import viewsets, generics
+from rest_framework import generics
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from materials.paginations import CustomPagination

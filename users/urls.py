@@ -10,7 +10,6 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from users.views import UserCreateAPIView
 
 app_name = UsersConfig.name
 

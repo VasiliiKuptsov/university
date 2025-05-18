@@ -1,5 +1,4 @@
-from datetime import datetime, timedelta, timezone
-from celery import shared_task
+from datetime import timedelta, timezone
 from django.conf import settings
 from django.core.mail import send_mail
 from django.utils import timezone
@@ -7,7 +6,6 @@ from materials.models import Course, Subscription
 from users.models import User
 
 
-# @shared_task
 def course_update(course_pk):
     course = Course.objects.filter(pk=course_pk).first()
     users = User.objects.all()
@@ -22,7 +20,6 @@ def course_update(course_pk):
             )
 
 
-# @shared_task
 def check_last_login():
     users = User.objects.filter(last_login__isnull=False)
     for user in users:

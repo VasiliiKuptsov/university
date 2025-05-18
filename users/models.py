@@ -80,5 +80,6 @@ class Payment(models.Model):
         verbose_name = "Оплата"
         verbose_name_plural = "Оплаты"
         ordering = ('-payment_method',)
+
     def __str__(self):
         return self.payment_method

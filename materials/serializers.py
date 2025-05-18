@@ -17,7 +17,7 @@ class CourseSerializer(serializers.ModelSerializer):
     lessons = SerializerMethodField()
     lessons_set = LessonSerializer(many=True, read_only=True, source="course")
     lessons_count = serializers.SerializerMethodField(read_only=True)
-    #subscription = SerializerMethodField()
+    # subscription = SerializerMethodField()
 
     def get_lessons(self, course):
         return [lesson.name for lesson in Lesson.objects.filter(course=course)]

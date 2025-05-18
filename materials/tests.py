@@ -40,7 +40,6 @@ class CourseTestCase(APITestCase):
             Course.objects.all().count(), 2
         )
 
-
     def test_course_delete(self):
         url = reverse('materials:course-detail', args=(self.course.pk,))
 

@@ -1,14 +1,11 @@
 import os
 import sys
 from datetime import timedelta
-
 from dotenv import load_dotenv
-
-load_dotenv(override=True)
-
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -141,8 +138,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-
-
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -158,9 +153,7 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
 }
 
-
-STRIPE_API_KEY = "sk_test_51RDMLgQwWs8OKaTJBOgtVQlSbloNLbxKL7JjVxQtgJUBCswcB0jdt6lMllCKUqZsWfwmtD64Mdi4vXNlkLXCUQGc00vYzYTU7o"  #os.getenv('STRIPE_API_KEY')
-
+STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
 CACHE_ENABLE = True
 if CACHE_ENABLE:
     CACHES = {
@@ -173,7 +166,7 @@ if CACHE_ENABLE:
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
 EMAIL_HOST_USER = "proba1.21@mail.ru"
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")  #"eJEiFkz1QhXQewgLtheN"
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
@@ -204,11 +197,3 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": timedelta(days=1),
     },
 }
-
-
-DOCKER_HUB_USERNAME=os.getenv("DOCKER_HUB_USERNAME") #"vasiliikuptsov"
-DOCKER_HUB_TOKEN=os.getenv("DOCKER_HUB_TOKEN")
-
-
-
-

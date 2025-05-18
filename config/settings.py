@@ -86,7 +86,8 @@ DATABASES = {
         "HOST": "localhost",  # os.getenv("HOST"),
         "PORT": "5432",  # os.getenv("PORT"),
         "TEST": {
-            "NAME": 'university',
+            "NAME": 'test_university',
+            "CHARSET": "UTF8"
         }
     }
 }

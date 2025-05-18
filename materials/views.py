@@ -43,7 +43,6 @@ class CourseViewSet(ModelViewSet):
             self.permission_classes = (~IsModerator | IsOwner,)
         return super().get_permissions()
 
-
     def perform_update(self, serializer):
         instance = serializer.save()
         course_update.delay(instance.pk)

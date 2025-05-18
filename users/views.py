@@ -49,7 +49,6 @@ class PaymentViewSet(ModelViewSet):
     search_fields = ["payment_course", "payment_lesson", "payment_method"]
 
 
-
 class UserCreateAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()

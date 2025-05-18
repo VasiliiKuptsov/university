@@ -1,4 +1,5 @@
 import os
+import sys
 from datetime import timedelta
 
 from dotenv import load_dotenv
@@ -91,8 +92,13 @@ DATABASES = {
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+if "test" in sys.argv:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "test_db.sqlite3",
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -154,6 +160,15 @@ SIMPLE_JWT = {
 
 
 STRIPE_API_KEY = "sk_test_51RDMLgQwWs8OKaTJBOgtVQlSbloNLbxKL7JjVxQtgJUBCswcB0jdt6lMllCKUqZsWfwmtD64Mdi4vXNlkLXCUQGc00vYzYTU7o"  #os.getenv('STRIPE_API_KEY')
+
+CACHE_ENABLE = True
+if CACHE_ENABLE:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": "redis://localhost:6379/1",
+        }
+    }
 
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525

@@ -20,6 +20,14 @@ services:
       - DEBUG=False
       - DATABASE_HOST=db
 
+      nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
   db:
     image: postgres
     volumes:

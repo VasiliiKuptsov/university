@@ -31,18 +31,6 @@ class PaymentCreateAPIView(CreateAPIView):
         payment.save()
 
 
-class PaymentViewSet(ModelViewSet):
-    queryset = Payment.objects.all()
-    serializer_class = PaymentSerializer
-    filter_backends = [
-        DjangoFilterBackend,
-        filters.OrderingFilter,
-        filters.SearchFilter,
-    ]
-    ordering_fields = ["payment_date", "cost"]
-    search_fields = ["payment_course", "payment_lesson", "payment_method"]
-
-
 class UserCreateAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()

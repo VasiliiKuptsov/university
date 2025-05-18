@@ -8,7 +8,7 @@ class YouTubeValidator:
 
     def __call__(self, value):
         url = "http://youtube.com"
-        if value.get("url_video"):
-            if url not in value.get("url_video"):
+        if value.get("video"):
+            if url not in value.get("video"):
                 raise ValidationError("Необходимо присутствие ссылки на youtube.")
         return None

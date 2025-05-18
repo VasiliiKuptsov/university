@@ -34,6 +34,7 @@ urlpatterns = [
         SubscriptionCreateAPIView.as_view(),
         name="subscription_create",
     ),
+
 ]
 
 urlpatterns += router.urls

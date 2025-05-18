@@ -1,0 +1,13 @@
+SECRET_KEY = "django-insecure-o*dvp)yyptih!xx))zs=eo^^^*b*w@8jvmtrhhgu=7j9k)w+&s"
+
+DEBUG=
+
+NAME= "habit"
+USER= "postgres"
+PASSWORD= "1705"
+HOST= "localhost"
+PORT= "5432"
+
+TELEGRAM_BOT_API_KEY = "7913327394:AAEqjlSM9oUX0jn0O0P7_LYHDvj3uqocF7k"
+TELEGRAM_CHAT_ID = 5125505763
+TELEGRAM_URL = 'https://core.telegram.org/bots/api'

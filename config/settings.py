@@ -206,5 +206,9 @@ CELERY_BEAT_SCHEDULE = {
 }
 
 
+DOCKER_HUB_USERNAME=os.getenv("DOCKER_HUB_USERNAME") #"vasiliikuptsov"
+DOCKER_HUB_TOKEN=os.getenv("DOCKER_HUB_TOKEN")
+
+
 
 

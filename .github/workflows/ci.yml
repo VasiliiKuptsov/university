@@ -33,10 +33,10 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: "3.11"
 
@@ -46,6 +46,9 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run tests
+      env:
+        SECRET_KEY: ${{ secrets.SSH_KEY }}
+        DJANGO_SETTINGS_MODULE: "university.settings"
       run: python manage.py test
 
   build:

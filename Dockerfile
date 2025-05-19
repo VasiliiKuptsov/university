@@ -1,14 +1,14 @@
 FROM python:3.11-slim
 
-WORKDIR /code
+WORKDIR /app
 
 COPY ./requirements.txt .
 
-RUN pip install --no=cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 # создаем права на дирректорию для статич файлов
-RUN mkdir -p/app/staticfailes && chmode -R 755 /app/stativfiles
+RUN mkdir -p /app/staticfiles && chmod -R 755 /app/staticfiles
 
 EXPOSE 8000
 

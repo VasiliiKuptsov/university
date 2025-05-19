@@ -1,5 +1,4 @@
 import os
-import sys
 from datetime import timedelta
 from dotenv import load_dotenv
 from pathlib import Path
@@ -86,16 +85,13 @@ DATABASES = {
         "PASSWORD": "1705",  # os.getenv("PASSWORD"),
         "HOST": "localhost",  # os.getenv("HOST"),
         "PORT": "5432",  # os.getenv("PORT"),
+        "TEST": {
+            "NAME": 'test_university',
+            "CHARSET": "UTF8"
+        }
     }
 }
 
-if "test" in sys.argv:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "test_db.sqlite3",
-        }
-    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {

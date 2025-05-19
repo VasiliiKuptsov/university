@@ -19,3 +19,12 @@ TELEGRAM_URL = 'https://core.telegram.org/bots/api'
         poetry config virtualenvs.create false
         poetry install --no-root
 
+
+      - name: Deploy to Server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+          docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/my_app:${{ github.sha }}
+          docker stop my_app || true
+          docker rm my_app || true
+          docker run -d --name my_app -p 80:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/my_app:${{ github.sha }}
+          EOF
